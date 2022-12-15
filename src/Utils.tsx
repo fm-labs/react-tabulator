@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render } from 'react-dom';
+import { reactFormatter18 } from "./Utils18";
 
 export function clone(obj: any) {
   return JSON.parse(JSON.stringify(obj));
@@ -39,6 +40,15 @@ export function isSameObject(a: any, b: any) {
 }
 
 export function reactFormatter(JSX: any) {
+
+  console.log(React.version);
+  const versionMaj = parseInt(React.version.split(".")[0], 10);
+  console.log(React.version, versionMaj);
+
+  if (versionMaj >= 18) {
+    return reactFormatter18(JSX)
+  }
+
   return function customFormatter(cell: any, formatterParams: any, onRendered: (callback: () => void) => void) {
     // cell - the cell component
     // formatterParams - parameters set for the column
