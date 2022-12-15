@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-dom';
-import { reactVersion } from "../Utils18";
-import MultiValueFormatter18 from "./MultiValueFormatter18";
+import { createRoot } from 'react-dom/client';
 
 const createCellEl = () => {
   const el = document.createElement('div');
@@ -13,11 +11,6 @@ const createCellEl = () => {
 // default style: comma separated plain text
 // other styles: PILL
 export default function(cell: any, formatterParams: any, onRendered: (fn: any) => void) {
-  const [_, versionMaj] = reactVersion();
-  if (versionMaj >= 18) {
-    return MultiValueFormatter18(cell, formatterParams, onRendered);
-  }
-
   const style = formatterParams.style || ''; // comma separated plain text
 
   const arr = cell.getValue() || [];
@@ -37,6 +30,7 @@ export default function(cell: any, formatterParams: any, onRendered: (fn: any) =
   const el = createCellEl();
   el.className = 'multi-value-formatter-content';
   el.title = arr && arr.length > 0 && typeof arr[0] === 'string' ? arr.join(', ') : '';
-  render(content, el);
+  const root = createRoot(el);
+  root.render(content);
   return el;
 }
