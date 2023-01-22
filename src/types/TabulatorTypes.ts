@@ -1611,6 +1611,7 @@ declare namespace Tabulator {
         | CheckboxParams
         | SelectParams
         | AutoCompleteParams
+        | ListEditorParams
         | InputParams
         | TextAreaParams
         | ((cell: CellComponent) => {});
@@ -1788,6 +1789,29 @@ declare namespace Tabulator {
          */
         searchingPlaceholder?: string | HTMLElement | undefined;
         emptyPlaceholder?: string | HTMLElement | undefined;
+    }
+
+    interface ListEditorParams extends SharedEditorParams {
+        values?: string[] | { value: string, label: string }[],
+        valuesURL?: string
+        valuesLookup?: string,
+        valuesLookupField?: string,
+        clearable?: boolean
+        itemFormatter: any, // @todo ts type
+        // elementAttributes? : any
+        // verticalNavigation // @todo
+        sort?: "asc" | "desc" | undefined
+        defaultValue?: any,
+        emptyValue?: any,
+        maxWidth?: number | true,
+        placeHolderLoading?: string | HTMLElement | undefined; // @todo callback type
+        placeHolderEmpty?: string | HTMLElement | undefined; // @todo callback type
+        multiselect?: boolean
+        autocomplete?: boolean
+        allowEmpty?: boolean
+        listOnEmpty?: boolean
+        mask?: string
+        freetext?: boolean
     }
 
     type ValueStringCallback = (value: any) => string;

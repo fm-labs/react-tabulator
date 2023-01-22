@@ -1099,7 +1099,7 @@ declare namespace Tabulator {
     type Formatter = 'plaintext' | 'textarea' | 'html' | 'money' | 'image' | 'datetime' | 'datetimediff' | 'link' | 'tickCross' | 'color' | 'star' | 'traffic' | 'progress' | 'lookup' | 'buttonTick' | 'buttonCross' | 'rownum' | 'handle' | 'rowSelection' | 'responsiveCollapse' | ((cell: CellComponent, formatterParams: {}, onRendered: EmptyCallback) => string | HTMLElement);
     type FormatterParams = MoneyParams | ImageParams | LinkParams | DateTimeParams | DateTimeDifferenceParams | TickCrossParams | TrafficParams | ProgressBarParams | StarRatingParams | RowSelectionParams | JSONRecord | ((cell: CellComponent) => {});
     type Editor = true | 'input' | 'textarea' | 'number' | 'range' | 'tickCross' | 'star' | 'select' | 'autocomplete' | 'list' | ((cell: CellComponent, onRendered: EmptyCallback, success: ValueBooleanCallback, cancel: ValueVoidCallback, editorParams: {}) => HTMLElement | false);
-    type EditorParams = NumberParams | CheckboxParams | SelectParams | AutoCompleteParams | InputParams | TextAreaParams | ((cell: CellComponent) => {});
+    type EditorParams = NumberParams | CheckboxParams | SelectParams | AutoCompleteParams | ListEditorParams | InputParams | TextAreaParams | ((cell: CellComponent) => {});
     type ScrollToRowPosition = 'top' | 'center' | 'bottom' | 'nearest';
     type ScrollToColumnPosition = 'left' | 'center' | 'middle' | 'right';
     type ColumnDefinitionAlign = 'left' | 'center' | 'right';
@@ -1236,6 +1236,29 @@ declare namespace Tabulator {
          */
         searchingPlaceholder?: string | HTMLElement | undefined;
         emptyPlaceholder?: string | HTMLElement | undefined;
+    }
+    interface ListEditorParams extends SharedEditorParams {
+        values?: string[] | {
+            value: string;
+            label: string;
+        }[];
+        valuesURL?: string;
+        valuesLookup?: string;
+        valuesLookupField?: string;
+        clearable?: boolean;
+        itemFormatter: any;
+        sort?: "asc" | "desc" | undefined;
+        defaultValue?: any;
+        emptyValue?: any;
+        maxWidth?: number | true;
+        placeHolderLoading?: string | HTMLElement | undefined;
+        placeHolderEmpty?: string | HTMLElement | undefined;
+        multiselect?: boolean;
+        autocomplete?: boolean;
+        allowEmpty?: boolean;
+        listOnEmpty?: boolean;
+        mask?: string;
+        freetext?: boolean;
     }
     type ValueStringCallback = (value: any) => string;
     type ValueBooleanCallback = (value: any) => boolean;
